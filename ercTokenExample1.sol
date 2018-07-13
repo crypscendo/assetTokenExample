@@ -1,11 +1,6 @@
 pragma solidity ^0.4.18;
 
-// ----------------------------------------------------------------------------
 
-
-// ----------------------------------------------------------------------------
-// Safe maths
-// ----------------------------------------------------------------------------
 contract SafeMath {
     function safeAdd(uint a, uint b) public pure returns (uint c) {
         c = a + b;
@@ -28,7 +23,6 @@ contract SafeMath {
 
 // ----------------------------------------------------------------------------
 // ERC Token Standard #20 Interface
-// https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md
 // ----------------------------------------------------------------------------
 contract ERC20Interface {
     function totalSupply() public constant returns (uint);
@@ -45,8 +39,6 @@ contract ERC20Interface {
 
 // ----------------------------------------------------------------------------
 // Contract function to receive approval and execute function in one call
-//
-// Borrowed from MiniMeToken
 // ----------------------------------------------------------------------------
 contract ApproveAndCallFallBack {
     function receiveApproval(address from, uint256 tokens, address token, bytes data) public;
@@ -87,7 +79,7 @@ contract Owned {
 // ERC20 Token, with the addition of symbol, name and decimals and assisted
 // token transfers
 // ----------------------------------------------------------------------------
-contract FucksToken is ERC20Interface, Owned, SafeMath {
+contract testToken is ERC20Interface, Owned, SafeMath {
     string public symbol;
     string public  name;
     uint8 public decimals;
@@ -100,11 +92,11 @@ contract FucksToken is ERC20Interface, Owned, SafeMath {
     // ------------------------------------------------------------------------
     // Constructor
     // ------------------------------------------------------------------------
-    function FucksToken() public {
-        symbol = "0FUCKS";
-        name = "0 Fucks Token";
+    function testToken() public {
+        symbol = "test1";
+        name = "Test Token";
         decimals = 18;
-        _totalSupply = 100000000000000000000000000;
+        _totalSupply = 1000000000000;
         balances[0x5A86f0cafD4ef3ba4f0344C138afcC84bd1ED222] = _totalSupply;
         Transfer(address(0), 0x5A86f0cafD4ef3ba4f0344C138afcC84bd1ED222, _totalSupply);
     }
@@ -142,10 +134,6 @@ contract FucksToken is ERC20Interface, Owned, SafeMath {
     // ------------------------------------------------------------------------
     // Token owner can approve for spender to transferFrom(...) tokens
     // from the token owner's account
-    //
-    // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md
-    // recommends that there are no checks for the approval double-spend attack
-    // as this should be implemented in user interfaces 
     // ------------------------------------------------------------------------
     function approve(address spender, uint tokens) public returns (bool success) {
         allowed[msg.sender][spender] = tokens;
